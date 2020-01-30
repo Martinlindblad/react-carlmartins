@@ -1,0 +1,92 @@
+[
+    {
+        "producer": "CARLMARTINS",
+        "id": 1,
+        "track": [
+            {
+                "title": "1984"
+            },
+            {
+                "album": "Led Line Tullinge"
+            },
+            {
+                "year": 2017
+            },
+            {
+                "artwork": "https://funkadelphia.files.wordpress.com/2012/09/odesza-summers-gone-lp.jpg"
+            },
+            {
+                "duration": 168
+            },
+            {
+                "source": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3"
+            },
+            {
+                "buyUrl": "https://carlmartins.com/beat/1984-store-test-track-644100"
+            },
+            {
+                "description": "\n\tYeah I'm callin' in to request... uh... any music, that ain't this. Stop playing everything that you been playing because your music sounds like a dumpster rollin' down five flights o' stairs!\n      "
+            }
+        ]
+    },
+    {
+        "producer": "CARLMARTINS",
+        "id": 2,
+        "track": [
+            {
+                "title": "ELDA TULLINGE"
+            },
+            {
+                "album": "Led Line Tullinge"
+            },
+            {
+                "year": 2019
+            },
+            {
+                "artwork": "https://funkadelphia.files.wordpress.com/2012/09/odesza-summers-gone-lp.jpg"
+            },
+            {
+                "duration": 192
+            },
+            {
+                "source": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3"
+            },
+            {
+                "buyUrl": "https://carlmartins.com/beat/1984-store-test-track-644100"
+            },
+            {
+                "description": "\n\tYeah I'm callin' in to request... uh... any music, that ain't this. Stop playing everything that you been playing because your music sounds like a dumpster rollin' down five flights o' stairs!\n      "
+            }
+        ]
+    },
+    {
+        "producer": "CARLMARTINS",
+        "id": 3,
+        "track": [
+            {
+                "title": "Masterd"
+            },
+            {
+                "album": "Led Line Tullinge"
+            },
+            {
+                "year": 2020
+            },
+            {
+                "artwork": "https://funkadelphia.files.wordpress.com/2012/09/odesza-summers-gone-lp.jpg"
+            },
+            {
+                "duration": 192
+            },
+            {
+                "source": "https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wwy.mp3"
+            },
+            {
+                "buyUrl": "https://carlmartins.com/beat/1984-store-test-track-644100"
+            },
+            {
+                "description": "\n\tYeah I'm callin' in to request... uh... any music, that ain't this. Stop playing everything that you been playing because your music sounds like a dumpster rollin' down five flights o' stairs!\n      "
+            }
+        ]
+    }
+]
