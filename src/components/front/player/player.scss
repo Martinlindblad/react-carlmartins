@@ -39,13 +39,14 @@ $title: #FFCDF4;
 
 .player{
     position: absolute;
-    height: 30%;
+    height: 40%;
     width: 50%;
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%; 
     grid-template-rows: 20% 20% 20% 20% 20%; 
     overflow: hidden;
     z-index: 5;
+    
 
     .artwork{
         height: 120px;
@@ -57,21 +58,18 @@ $title: #FFCDF4;
         justify-self: start;
         align-self: start;
         margin: 10px;
+        box-shadow: inset 0px 0px 50px 1px $title;
     }
 
     .button{
         width: 30px;
         height: 15px;
         padding: 10px;
-        margin: 10px;
         font-size: 1.5rem;
-        // background: linear-gradient(217deg,#332530, #E903B4, #80677A 150.71%);
-        color: white;
         position: relative;
         grid-column: 4 / 5;
-        grid-row: 4 / 4;
+        grid-row: 3 /3;
         justify-self: end;
-        align-self: center;
         cursor: pointer;
         &:hover{
             cursor: pointer;
@@ -124,7 +122,8 @@ $title: #FFCDF4;
         flex-direction: row;
         justify-content: space-between;
         position: relative;
-        min-height: 50px;
+        min-height: 75px;
+        max-width: 475px;
         .Time{
             display: flex;
             align-self: center;
@@ -138,7 +137,7 @@ $title: #FFCDF4;
             height: 100%;
             width: 0%;
             transition: width .25s ease;
-            pointer-events: none
+            pointer-events: none;
         }
     }
     

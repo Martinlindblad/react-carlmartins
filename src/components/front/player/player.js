@@ -10,53 +10,50 @@ class Player extends Component {
         super(props);
         this.state = {
             playStatus: false,
+            renderStatus: false,
             currentTime: 0,
             track: {
-                producer: "CARLMARTINS",
-                artwork: "",
-                id: 1,
-                title: "mastered",
-                album: "Led Line Tullinge",
-                year: 2017,
-                duration: 168,
-                source: "https://stream.beatstars.com/c/carlmartins-258227/644100/506f48319b5719fb438351a19889d655.mp3?on_callback=true",
-                buyUrl: "https://carlmartins.com/beat/1984-store-test-track-644100",
-                description: "Yeah I'm callin' in to request... uh... any music, that ain't this. Stop playing everything that you been playing because your music sounds like a dumpster rollin' down five flights o' stairs!"
+                source: "",
             }
 
         };
-
+        this.togglePlayPause.bind();
     }
 
     componentDidMount() {
         this.setCurrentTrackData();
+        this.renderAudio()
     }
-    
-    
+
+    renderAudio() {
+        this.setState({ renderStatus: true })
+        setTimeout(() => {
+            this.getStorage()
+        }, 1000);
+    }
+
     setCurrentTrackData() {
         const rootRef = fire.database().ref()
         const speedRef = rootRef.child('track');
         speedRef.on('value', snap => {
             this.setState({
                 track: snap.val()
-            }, this.getStorage())
-            
+            })
         })
     }
     getStorage() {
-        this.getArtwork();
         this.getAudio()
+        this.getArtwork();
     }
 
     getArtwork() {
         const storage = fire.storage();
-        const storageRef = storage.ref();
+        const storageRef = storage.refFromURL('gs://react-carlmartins.appspot.com/track')
         let trackTitle = this.state.track.title;
         trackTitle = trackTitle.toString().toLowerCase().replace(/\s/g, '');
-        storageRef.child(`track/${trackTitle}.jpg`)
+        storageRef.child(`${trackTitle}.jpg`)
             .getDownloadURL()
             .then((url) => {
-                // This can be downloaded directly:
                 var xhr = new XMLHttpRequest();
                 xhr.responseType = 'blob';
                 xhr.onload = function (event) {
@@ -64,15 +61,13 @@ class Player extends Component {
                 };
                 xhr.open('GET', url);
                 xhr.send();
-                // Or inserted into an <img> element:
                 let art = url;
                 this.setState({
                     track: {
                         ...this.state.track,
-                         artwork: art
+                        artwork: art
                     }
                 });
-                console.log({ art });
             }).catch(function (error) {
                 // Handle any errors
                 console.log('this is some error', error)
@@ -81,13 +76,12 @@ class Player extends Component {
 
     getAudio() {
         const storage = fire.storage();
-        const storageRef = storage.ref();
+        const storageRef = storage.refFromURL('gs://react-carlmartins.appspot.com/track')
         let trackAudio = this.state.track.title;
         trackAudio = trackAudio.toString().toLowerCase().replace(/\s/g, '');
-        storageRef.child(`track/${trackAudio}.mp3`)
+        storageRef.child(`${trackAudio}.mp3`)
             .getDownloadURL()
             .then((url) => {
-                // This can be downloaded directly:
                 var xhr = new XMLHttpRequest();
                 xhr.responseType = 'blob';
                 xhr.onload = function (event) {
@@ -95,40 +89,45 @@ class Player extends Component {
                 };
                 xhr.open('GET', url);
                 xhr.send();
-                // Or inserted into an <img> element:
                 let audio = url;
                 this.setState({
                     track: {
                         ...this.state.track,
-                         source: audio
+                        source: audio
                     }
                 });
-                console.log({ audio });
             }).catch(function (error) {
                 // Handle any errors
                 console.log('this is some error', error)
             });
     }
-    
+
     togglePlayPause = () => {
         let status = this.state.playStatus;
         let time = this.state.currentTime;
         let duration = this.state.track.duration
         let audio = document.getElementById('audio');
-             if (status === false) {
-                 status = true; audio.play();
-             } else if (time === duration) {
-                 status = false; audio.pause();
-             }
-             else {
-                 status = false; audio.pause();
-             }
+        if(time === 0){
+            audio.load();
+        }
+        if (status === false) {
+            status = true;
+            audio.play();
+        } else if (time === duration) {
+            status = false; audio.pause();
+        }
+        else {
+            status = false; 
+            audio.pause();
+        }
         this.setState({ playStatus: status });
         setInterval(() => {
             this.updateTime();
             this.updateBackground();
         }, 1000);
-    }
+    }       
+
+
 
     updateTime = (time) => {
         let audio = document.getElementById('audio');
@@ -157,10 +156,10 @@ class Player extends Component {
                     <Info track={this.state.track} />
                     <Time duration={Math.floor(this.state.track.duration / 60) + ':' + Math.floor(this.state.track.duration % 60 + 1)} currentTime={this.state.currentTime} />
                 </div>
-                <audio id="audio"><source src="" /> </audio>
+                {this.state.renderStatus === true ? <audio id="audio"><source src={this.state.track.source} /></audio> : null}
                 <div className="button" onClick={this.togglePlayPause}>
                     {this.state.playStatus === false ? "▶" : "⏸"}
-                </div>
+                </div> 
             </div>
         )
     }
