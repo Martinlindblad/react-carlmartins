@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import Header from "./components/header/header.js"
-import Front from "./components/front/front"
+import Player from "./components/front/player"
 // import Footer from "./components/footer/footer.js"
 import Background from './components/front/background/background.js';
 import './App.scss';
@@ -27,7 +27,8 @@ class App extends Component {
         
         {/* <Header />  */}
         <Background />
-        <Front /> 
+        <Player />
+
         {/* <Footer />  */}
       </div>
     )

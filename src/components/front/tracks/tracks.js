@@ -2,21 +2,18 @@ import React, { Component } from "react"
 import "./tracks.scss"
 import fire from "../../../fire"
 
-
-
 class Tracks extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             trackOne: {},
             trackTwo: {},
             trackThree: {},
             combined: [],
             artwork: [],
-
         };
-        this.updateSong.bind()
-        this.updateSong = this.updateSong.bind(this)
+        this.sendSource.bind()
+        this.sendSource = this.sendSource.bind(this)
     }
 
     componentDidMount() {
@@ -28,7 +25,7 @@ class Tracks extends Component {
 
     getTrackOne() {
         const rootRef = fire.database().ref()
-        const speedRef = rootRef.child('track');
+        const speedRef = rootRef.child('trackOne');
         speedRef.on('value', snap => {
             this.setState({
                 trackOne: snap.val()
@@ -87,18 +84,18 @@ class Tracks extends Component {
                     xhr.open('GET', url);
                     xhr.send();
                     let art = url;
-                    
+
                     var a = this.state.artwork.concat(art);
                     this.setState({ artwork: a })
 
 
-                    
+
                 }).catch(function (error) {
                     // Handle any errors
                     console.log('this is some error', error)
                 });
-            }
         }
+    }
 
     combineState() {
         this.setState({
@@ -117,34 +114,54 @@ class Tracks extends Component {
     }
 
     updateSong() {
-        let audio = document.querySelector('audio');
-        console.log(audio.firstChild.src)
-        console.log(this.props.track.source)
-        // console.log(audio.firstChild.src)
-                // audio.pause();
-                // audio.load();
-                // audio.play();
+        // const audio2 = this.props.track.source
+        // audio.pause();
+        // audio.play();
     }
+    sendSource = (track, trackSource) => {
+        let audio = document.querySelector('audio');
+        this.props.updateCurrentTrackData(track);
+        audio.load();
+        this.props.updateSource(trackSource);
+        this.props.togglePlayPause()
+    }
+
+
+    // Use this for event to go to buyUrl onClick={() => window.location.assign(track.buyUrl)}
+
 
     render() {
         return (
 
             <div className="tracks-container">
+            {/* {this.props.track.track === track ?  */}
                 {this.state.combined.map((track, i) => {
                     return (
-                        <div key={i} className={track.track} style={{ 'backgroundImage': 'url(' + this.state.artwork[i] + ')' }}>
-                            <div className="bubble"><p className={ "p" + track.track} onClick={this.updateSong}>▶</p></div>
-                            <h2 className="Artist">{track.title}</h2>
-                            <div className="track-info">
-                                <h3>{track.album}</h3>
-                                <p>{track.description}</p>
+                        <div key={i} className={track.track} style={{ 'backgroundImage': 'url(' + this.state.artwork[track.id] + ')' }}>
+                            <div className="bubble"><p className={"p" + track.track} onClick={() => {
+                                this.sendSource(track.track, track.source)
+                            }}>
+                                {this.props.playStatus === false ? "▶" : "⏸"}</p>
+                            </div>
+
+                            
+                        
+                        }
+                            <div className="wrapper" onClick={() => window.location.assign(track.buyUrl)}>
+                                <h2 className="Artist">{track.title}</h2>
+                                <div className="track-info">
+                                    <h3>{track.album}</h3>
+                                    <p>{track.description}</p>
+                                </div>
                             </div>
                         </div>
                     )
                 }
                 )
-                }
-            </div>
+            }
+            </div> 
+            
+        
         )
     }
 }
