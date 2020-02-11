@@ -15,7 +15,7 @@ class Player extends Component {
             renderStatus: false,
             currentTime: 0,
             playingTrack: "",
-            whichTrack: "all",
+            whichTrack: "al",
             track: {
                 source: "",
             },
@@ -78,10 +78,25 @@ class Player extends Component {
         }, 1500);
     }
 
+    gatherTracks() {
+           let one = document.querySelector('.one')
+           let two = document.querySelector('.two')
+           let three = document.querySelector('.three')
+           one.style = ' ';
+           two.style = ' ';
+           three.style = ' ';
+           void one.offsetWidth;
+           one.style.animation = 'moveTrackOne 2s ease'
+           void two.offsetWidth;
+           two.style.animation = 'moveTrackTwo 2s ease'
+           void three.offsetWidth;
+           three.style.animation = 'moveTrackThree 2s ease'
+    }
 
     updateCurrentTrackData = (track) => {
         this.removeTrackRef()
         this.setTrackRef()
+        this.gatherTracks()
         setTimeout(() => {
             this.setState({ whichTrack: track })
             const rootRef = fire.database().ref(`tracks/track${track.charAt(0).toUpperCase() + track.slice(1)}`)
@@ -90,10 +105,10 @@ class Player extends Component {
                     console.log(this.state.track, `value`);
                 });
             })
-        }, 1000);
+        }, 2000);
         setTimeout(() => {
             this.getStorage()
-        }, 1500);
+        }, 3000);
     }
 
     getStorage() {
@@ -285,7 +300,7 @@ class Player extends Component {
                 </div>
                 {this.state.whichTrack === "all" ?
                     <Tracks artworks = {this.state.artworks} tracks ={this.state.tracks} removeTrackRef={this.removeTrackRef} playingTrack={this.state.playingTrack} buyTrack={this.state.whichTrack} updateCurrentTrackData={this.updateCurrentTrackData} setCurrentTrackData={this.setCurrentTrackData} updateSource={this.updateSource} togglePlayPause={this.togglePlayPause} track={this.state.track} playStatus={this.state.playStatus} />
-                    : <BuyTrack track={this.state.track} buyTrack={this.state.whichTrack} />
+                    : <BuyTrack togglePlayPause = {this.togglePlayPause} track={this.state.track} buyTrack={this.state.whichTrack} />
                 }
             </div>
         )

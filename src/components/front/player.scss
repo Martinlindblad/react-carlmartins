@@ -37,6 +37,23 @@ $title: #FFCDF4;
 	100% { transform:translateX( -300px 0); }
 }
 
+@keyframes moveTrackOne {
+
+    0%   { transform: translateX(0px); }
+    70% {opacity: 0;}
+    100%    { transform: translateX(70%); opacity: 0;}
+}
+@keyframes moveTrackTwo {
+    0%   { transform: translateY(0px); }
+    70% {opacity: 0;}
+    100%    {transform: translateY(-70%);opacity: 0; }
+}
+@keyframes moveTrackThree {
+    0%   { transform: translateY(0px); }
+    70% {opacity: 0;}
+    100%   { transform: translateY(70%); opacity: 0;}
+}
+
 .player{
     position: absolute;
     height: 40%;

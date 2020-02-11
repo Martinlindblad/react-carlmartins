@@ -76,8 +76,9 @@ class Tracks extends Component {
         audio.load();
         this.props.updateSource(trackSource);
         this.props.togglePlayPause()
-
     }
+
+
     // Use this for event to go to buyUrl onClick={() => window.location.assign(track.buyUrl)}
 
     render() {
