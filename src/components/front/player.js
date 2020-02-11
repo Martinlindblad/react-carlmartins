@@ -4,6 +4,7 @@ import Info from "./childcomponents/info";
 import "./player.scss"
 import fire from "../../fire"
 import Tracks from "./tracks/tracks"
+import BuyTrack from "./buyTrack/buyTrack"
 
 
 class Player extends Component {
@@ -13,9 +14,13 @@ class Player extends Component {
             playStatus: false,
             renderStatus: false,
             currentTime: 0,
+            playingTrack: "",
+            whichTrack: "all",
             track: {
                 source: "",
-            }
+            },
+            tracks: [],
+            artworks: {}
 
         };
         this.togglePlayPause.bind();
@@ -25,72 +30,76 @@ class Player extends Component {
     }
 
     componentDidMount() {
-        this.setCurrentTrackData();
-        this.renderAudio()
-    }
+        this.setTrackRef();
+        setTimeout(() => {
+            this.setCurrentTrackData()
+            this.renderAudio();
+        }, 1000);
 
-    renderAudio() {
-        this.setState({ renderStatus: true })
+        this.getTracks();
         setTimeout(() => {
             this.getStorage()
+        }, 2000);
+
+    }
+
+    // componentWillUnmount() {
+    //     this.removeTrackRef();
+    //     this.props.firebase.messages().off();
+    // }
+
+    renderAudio() {
+        setTimeout(() => {
+            this.setState({ renderStatus: true })
         }, 1000);
     }
 
-    // setCurrentTrackData = () => {
-    //         const rootRef = fire.database().ref()
-    //         const speedRef = rootRef.child(`trackOne`);
-           
-    //         speedRef.on('value', snap => {
-    //             this.setState({
-    //                 track: snap.val()
-    //             })
-    //         })
-    //     } 
+    setTrackRef = () => {
+        const rootRef = fire.database().ref();
+    }
+
+    removeTrackRef = () => {
+        const rootRef = fire.database().ref()
+        rootRef.off();
+    }
+
     setCurrentTrackData = () => {
-        const speedRef = fire.database().ref(`trackOne`)
+        const speedRef = fire.database().ref(`tracks/trackOne`)
         speedRef.on(`value`, snap => {
             this.setState({ track: snap.val() }, () => {
                 console.log(this.state.track, `set track`);
             });
         })
-        }
-        updateCurrentTrackData = (track) => {
-            console.log(track)
-            const rootRef = fire.database().ref(`track${track.charAt(0).toUpperCase() + track.slice(1)}`)
-            console.log(rootRef)
+        setTimeout(() => {
+            let track = this.state.track.track
+            this.setState({
+                playingTrack: track
+            })
+        }, 1500);
+    }
+
+
+    updateCurrentTrackData = (track) => {
+        this.removeTrackRef()
+        this.setTrackRef()
+        setTimeout(() => {
+            this.setState({ whichTrack: track })
+            const rootRef = fire.database().ref(`tracks/track${track.charAt(0).toUpperCase() + track.slice(1)}`)
             rootRef.on(`value`, snap => {
                 this.setState({ track: snap.val() }, () => {
                     console.log(this.state.track, `value`);
                 });
             })
-        }
-
-        // updateCurrentTrackData = (track) => {
-        //     console.log(track)
-        //     const rootRef = fire.database().ref(`track${track.charAt(0).toUpperCase() + track.slice(1)}`)
-        //     console.log(rootRef)
-        //     rootRef.on("child_added", snap => {
-        //         this.setState({ track: snap.val() }, () => {
-        //             console.log(this.state.track, "track");
-        //         });
-        //     })
-        // }
-    
-    // updateCurrentTrackData = (track) => {
-    //     const rootRef = fire.database().ref(`trackOne`)
-    //     // const speedRef = rootRef.child(`trackOne`);
-    //     // const speedRef = rootRef.child(`track${track.charAt(0).toUpperCase() + track.slice(1)}`);
-    //     console.log(rootRef)
-    //     rootRef.on('value', snap => {
-    //         this.setState({ track: snap.val() }, () => {
-    //             console.log(this.state.track, 'update track');
-    //         });
-    //     })
-    // }
+        }, 1000);
+        setTimeout(() => {
+            this.getStorage()
+        }, 1500);
+    }
 
     getStorage() {
         this.getAudio()
         this.getArtwork();
+        this.getArtworks();
     }
 
     getArtwork() {
@@ -103,7 +112,6 @@ class Player extends Component {
             .then((url) => {
                 var xhr = new XMLHttpRequest();
                 xhr.responseType = 'blob';
-             
                 xhr.open('GET', url);
                 xhr.send();
                 let art = url;
@@ -166,15 +174,12 @@ class Player extends Component {
         }
         this.setState({ playStatus: status });
         const timeBomb = setInterval(() => {
-
             this.updateTime();
             this.updateBackground();
-            console.log(time, duration)
-
         }, 1000);
-        if (status === false) {
+        setTimeout(() => {
             clearInterval(timeBomb)
-        }
+        }, duration * 1000);
     }
 
     updateSource = (trackSource) => {
@@ -203,6 +208,65 @@ class Player extends Component {
         timestamps.style['width'] = percent;
     }
 
+
+    //TRACKS
+
+    snapshotToArray(snap) {
+        var tracks = [];
+
+        snap.forEach(function (childSnapshot) {
+            var item = childSnapshot.val();
+            item.key = childSnapshot.key;
+            tracks.push(item);
+        });
+        this.setState({
+            tracks
+        })
+        return tracks
+    };
+
+    getTracks() {
+        const rootRef = fire.database().ref()
+        const speedRef = rootRef.child(`tracks`);
+        speedRef.on('value', snap => {
+            console.log(this.snapshotToArray(snap));
+        })
+    }
+
+    // getTracksStorage() {
+    //     this.getArtworks();
+    // }
+
+    getArtworks = () =>  {
+        const storage = fire.storage();
+        const storageRef = storage.ref();
+        let trackTitleOne = this.state.tracks[0].title;
+        let trackTitleTwo = this.state.tracks[1].title;
+        let trackTitleThree = this.state.tracks[2].title;
+        let trackCollect = [trackTitleOne, trackTitleTwo, trackTitleThree]
+
+        let artworks = [];
+        trackCollect.forEach(track => {
+            storageRef.child(`track/${track.toString().toLowerCase().replace(/\s/g, '')}.jpg`)
+            .getDownloadURL()
+            .then((url) => {
+                var xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.onload = function (event) {
+                    var blob = xhr.response;
+                };
+                xhr.open('GET', url);
+                xhr.send();
+                let art = url;
+                artworks.push(art);
+            }).catch(function (error) {
+                // Handle any errors
+                console.log('this is some error', error)
+            })
+        });
+            this.setState({artworks: artworks});
+    }
+
     render() {
         return (
             <div className="front">
@@ -219,7 +283,10 @@ class Player extends Component {
                         {this.state.playStatus === false ? "▶" : "⏸"}
                     </div>
                 </div>
-                <Tracks updateCurrentTrackData ={this.updateCurrentTrackData} setCurrentTrackData={this.setCurrentTrackData} updateSource={this.updateSource} togglePlayPause={this.togglePlayPause} track={this.state.track} playStatus={this.state.playStatus} />
+                {this.state.whichTrack === "all" ?
+                    <Tracks artworks = {this.state.artworks} tracks ={this.state.tracks} removeTrackRef={this.removeTrackRef} playingTrack={this.state.playingTrack} buyTrack={this.state.whichTrack} updateCurrentTrackData={this.updateCurrentTrackData} setCurrentTrackData={this.setCurrentTrackData} updateSource={this.updateSource} togglePlayPause={this.togglePlayPause} track={this.state.track} playStatus={this.state.playStatus} />
+                    : <BuyTrack track={this.state.track} buyTrack={this.state.whichTrack} />
+                }
             </div>
         )
     }

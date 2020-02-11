@@ -1,0 +1,108 @@
+$title: #FFCDF4;
+$trackH1: #FF4848;
+
+@keyframes rotateBoxShadow {
+    0%   { -moz-transform: translateX(100%); }
+    0%   { -moz-transform: translateX(100%); }
+    100% { -moz-transform: translateX(-100%); }
+}
+@keyframes fadeInTrackOne {
+    0%   { transform: translateX(-150%); }
+    0%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { transform: translateX(0%); }
+}
+@keyframes fadeInTrackTwo {
+    0%   { transform: translateY(150%); }
+    0%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { transform: translateY(0%); }
+}
+@keyframes fadeInTrackThree {
+    0%   { transform: translateY(-150%); }
+    0%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { transform: translateY(0%); }
+}
+@keyframes borderRotate {
+    0%   {  border-color: transparent $title transparent $title ; }
+    0%   {  background-color: transparent; }
+    30%   {  border-color: $title transparent $title transparent  ; }
+    70%   {  border-color: transparent $title transparent $title ; }
+    70%   {  background-color: rgba(255, 205, 244, 0.267) }
+    100%   { border-color: transparent $title transparent $title ;  }
+}
+@keyframes fadeInCircle {
+    0%   { transform: scale(0) translate(0px); }
+    0%   {  opacity: 0; }
+    10%   {  opacity: 0.3; }
+    10%   { transform: scale(100) translate(10px); }
+    20% { background-color: $title;}
+    30% { background-color: #f57c00;}
+    40% { background-color: #f06292;}
+    40%   { transform: scale(10) translate(20px); }
+    50% { background-color: #ba68c8;}
+    60% { background-color: #4fc3f7;}
+    60%   { transform: scale(20) translateY(10px) translateX(10px); }
+    60% { background-color: #76ff03;}
+    60% { background-color: #f57c00;}
+    60% { background-color: #673ab7;}
+    90%   { transform: scale(1) translateY(50px) translateX(-10px); }
+    100%   {  opacity: 0.2; }
+}
+
+.buyTrack{
+ 
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%; 
+    grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;  
+    overflow: hidden;
+    position: relative;
+    .one , .two, .three{
+        width: 80%;
+        height: 80%;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0px 3px 10px $title;
+        overflow: hidden;
+        border: 2px solid $title;
+        grid-column: 2 / 7;
+        grid-row: 5/10;
+        justify-self: center;
+        align-self: start;
+        z-index: 30;
+        &:after{
+            background: linear-gradient(300deg,#332530, #E903B4, #80677A 60%);
+        }
+        h2{
+            position: absolute;
+            left: 5%;
+            bottom: 20%;
+            word-spacing: 100vw; 
+        }        
+        .track-info{
+            width: 45%;
+            position: absolute;
+            right: 5%;
+            bottom: 20%;
+            h3{
+                &:after{
+                    width: 50%;
+                    bottom: 55%;
+                    margin: 0 auto;
+                    margin-left: 25%;
+                }
+            }
+        }
+        &:hover{
+            cursor: pointer;
+            transition: 0.5s all ease;
+            box-shadow:  0px 20px 10px -10px $title;
+        }
+     }
+}
