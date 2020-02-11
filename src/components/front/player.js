@@ -15,7 +15,7 @@ class Player extends Component {
             renderStatus: false,
             currentTime: 0,
             playingTrack: "",
-            whichTrack: "al",
+            whichTrack: "all",
             track: {
                 source: "",
             },
@@ -79,24 +79,26 @@ class Player extends Component {
     }
 
     gatherTracks() {
-           let one = document.querySelector('.one')
-           let two = document.querySelector('.two')
-           let three = document.querySelector('.three')
-           one.style = ' ';
-           two.style = ' ';
-           three.style = ' ';
-           void one.offsetWidth;
-           one.style.animation = 'moveTrackOne 2s ease'
-           void two.offsetWidth;
-           two.style.animation = 'moveTrackTwo 2s ease'
-           void three.offsetWidth;
-           three.style.animation = 'moveTrackThree 2s ease'
+        let one = document.querySelector('.one')
+        let two = document.querySelector('.two')
+        let three = document.querySelector('.three')
+        one.style = ' ';
+        two.style = ' ';
+        three.style = ' ';
+        void one.offsetWidth;
+        one.style.animation = 'moveTrackOne 2s ease'
+        void two.offsetWidth;
+        two.style.animation = 'moveTrackTwo 2s ease'
+        void three.offsetWidth;
+        three.style.animation = 'moveTrackThree 2s ease'
     }
 
     updateCurrentTrackData = (track) => {
         this.removeTrackRef()
         this.setTrackRef()
-        this.gatherTracks()
+        if (this.state.whichTrack === "all") {
+            this.gatherTracks()
+        }
         setTimeout(() => {
             this.setState({ whichTrack: track })
             const rootRef = fire.database().ref(`tracks/track${track.charAt(0).toUpperCase() + track.slice(1)}`)
@@ -252,7 +254,7 @@ class Player extends Component {
     //     this.getArtworks();
     // }
 
-    getArtworks = () =>  {
+    getArtworks = () => {
         const storage = fire.storage();
         const storageRef = storage.ref();
         let trackTitleOne = this.state.tracks[0].title;
@@ -263,23 +265,23 @@ class Player extends Component {
         let artworks = [];
         trackCollect.forEach(track => {
             storageRef.child(`track/${track.toString().toLowerCase().replace(/\s/g, '')}.jpg`)
-            .getDownloadURL()
-            .then((url) => {
-                var xhr = new XMLHttpRequest();
-                xhr.responseType = 'blob';
-                xhr.onload = function (event) {
-                    var blob = xhr.response;
-                };
-                xhr.open('GET', url);
-                xhr.send();
-                let art = url;
-                artworks.push(art);
-            }).catch(function (error) {
-                // Handle any errors
-                console.log('this is some error', error)
-            })
+                .getDownloadURL()
+                .then((url) => {
+                    var xhr = new XMLHttpRequest();
+                    xhr.responseType = 'blob';
+                    xhr.onload = function (event) {
+                        var blob = xhr.response;
+                    };
+                    xhr.open('GET', url);
+                    xhr.send();
+                    let art = url;
+                    artworks.push(art);
+                }).catch(function (error) {
+                    // Handle any errors
+                    console.log('this is some error', error)
+                })
         });
-            this.setState({artworks: artworks});
+        this.setState({ artworks: artworks });
     }
 
     render() {
@@ -299,8 +301,27 @@ class Player extends Component {
                     </div>
                 </div>
                 {this.state.whichTrack === "all" ?
-                    <Tracks artworks = {this.state.artworks} tracks ={this.state.tracks} removeTrackRef={this.removeTrackRef} playingTrack={this.state.playingTrack} buyTrack={this.state.whichTrack} updateCurrentTrackData={this.updateCurrentTrackData} setCurrentTrackData={this.setCurrentTrackData} updateSource={this.updateSource} togglePlayPause={this.togglePlayPause} track={this.state.track} playStatus={this.state.playStatus} />
-                    : <BuyTrack togglePlayPause = {this.togglePlayPause} track={this.state.track} buyTrack={this.state.whichTrack} />
+                    <Tracks artworks={this.state.artworks} // state artwork
+                        tracks={this.state.tracks} // state tracks
+                        removeTrackRef={this.removeTrackRef} // Method to remove ref
+                        playingTrack={this.state.playingTrack} // state for playing track
+                        buyTrack={this.state.whichTrack} // state for which track is playing
+                        updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
+                        setCurrentTrackData={this.setCurrentTrackData} // set current tracks data method
+                        updateSource={this.updateSource} // update source method
+                        togglePlayPause={this.togglePlayPause} // toggle playstatus button method
+                        track={this.state.track} // state for Player track
+                        playStatus={this.state.playStatus} // state for playstatus 
+                    />
+                    : <BuyTrack tracks={this.state.tracks} // state tracks
+                        playStatus={this.state.playStatus} // state for playstatus
+                        updateSource={this.updateSource} // update source method
+                        artworks={this.state.artworks} // state artwork
+                        updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
+                        togglePlayPause={this.togglePlayPause} // toggle playstatus button method
+                        track={this.state.track} // state for Player track
+                        buyTrack={this.state.whichTrack} // state for which track is playing
+                        />
                 }
             </div>
         )

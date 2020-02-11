@@ -49,6 +49,7 @@ $trackH1: #FF4848;
     grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;  
     overflow: hidden;
     position: relative;
+    animation: fadeIn 5s ease;
     .bottom{
         width: 100%;
         height: 45%;
@@ -57,13 +58,15 @@ $trackH1: #FF4848;
         position: absolute;
         bottom: 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
+        overflow: hidden;
         background-color: #1B1B1B;
         .buy{
             width: 50%;
-            margin: 0 auto;
             text-transform: capitalize;
+            display: flex;
+            flex-direction: column;
             h4{
                 font-size: 1.5rem;
                 margin: 0 auto;
@@ -72,6 +75,7 @@ $trackH1: #FF4848;
                 margin: 1% auto;
             }
             .button{
+                margin: 0 auto;
                 font-size: 1rem;
                 width: 80px;
                 text-align: center;
@@ -88,6 +92,60 @@ $trackH1: #FF4848;
                     cursor: pointer;
                 }
             }
+        }
+        .carousel-container{
+            width: 50%;
+            height: 100%;
+            margin: 0 auto;
+            text-transform: capitalize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            .carousel{
+                height: 80%;
+                .slider{
+                    height: 100%;
+                    overflow: hidden;
+                    width: 300px;
+                    .bone, .btwo, .bthree {
+                        background-position: center;
+                        background-size: cover;
+                        &::after{
+                         background: linear-gradient(300deg,#332530, #E903B4, #80677A 100%);
+                         position: absolute;
+                         width: 100%;
+                         height: 100%;
+                         left: 0;
+                         bottom: 0;
+                         content: "";
+                         opacity: 0.5;
+                        }
+                    }
+                }
+            }
+        }
+        .button-next{
+            position: absolute;
+            background-color: transparent;  
+            left: 10%;
+            top: 40%;
+            padding: 10px;
+            text-decoration: none;
+            color: $title;
+            font-size: 1.5rem;
+            border: none;
+        } 
+        .button-back{
+            border: none;
+            font-size: 1.5rem;
+            color: $title;
+            position: absolute;
+            background-color: transparent;  
+            right: 10%;
+            top: 40%;
+            padding: 10px;
+            text-decoration: none;
         }
     }
     .one , .two, .three{
@@ -112,7 +170,7 @@ $trackH1: #FF4848;
         align-content: center;
         flex-direction: row-reverse;
         &::after{
-            background: linear-gradient(300deg,#332530, #E903B4, #80677A 60%);
+            background: linear-gradient(300deg,#332530, #E903B4, #80677A 100%);
             position: absolute;
             width: 100%;
             height: 100%;
@@ -120,7 +178,7 @@ $trackH1: #FF4848;
             bottom: 0;
             z-index: -1;
             content: "";
-            opacity: 0.4;
+            opacity: 0.5;
         }
         h2{
             position: relative;
@@ -128,11 +186,30 @@ $trackH1: #FF4848;
             height: 55%;
             font-size: 3rem;
             text-align: center;
-            word-spacing: 100vw; 
             line-height: 600%;
             margin: 0 auto;
+            color: $trackH1;
         }      
-        
+        .wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            overflow: hidden;
+            width: 100%;
+            max-height: 200px;
+
+            h2{
+                margin-left: 0;
+                margin-top: 10%;
+                line-height: 100%;
+                opacity: 0.7;
+                font-size: 1.5rem;
+                text-shadow: 1px 2px 3px black;
+                color: $trackH1;
+            }
+        }
+
         .bubble{
             width:50%;
             height: 55%;
