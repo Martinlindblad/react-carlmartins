@@ -38,20 +38,19 @@ $trackH1: #FF4848;
     10%   {  opacity: 0.3; }
     10%   { transform: scale(100) translate(10px); }
     20% { background-color: $title;}
-    30% { background-color: #f57c00;}
-    40% { background-color: #f06292;}
+    30% {   box-shadow: inset 0px 3px 10px #f57c00;}
+    40% { box-shadow: inset 0px 3px 10px #f06292;}
     40%   { transform: scale(10) translate(20px); }
-    50% { background-color: #ba68c8;}
-    60% { background-color: #4fc3f7;}
+    50% {   box-shadow: inset 0px 3px 10px #ba68c8; }
+    60% {  box-shadow: inset 0px 3px 10px #fc3f7e;}
     60%   { transform: scale(20) translateY(10px) translateX(10px); }
-    60% { background-color: #76ff03;}
-    60% { background-color: #f57c00;}
-    60% { background-color: #673ab7;}
+    60% {  box-shadow: inset 0px 3px 10px #76ff03;}
+    60% {  box-shadow: inset 0px 3px 10px #f57c00;}
+    60% {   box-shadow: inset 0px 3px 10px #673ab7;}
     90%   { transform: scale(1) translateY(50px) translateX(-10px); }
     100%   {  opacity: 0.2; }
+    
 }
-
-
 
 .tracks-container{
     height: 100vh;
@@ -73,13 +72,14 @@ $trackH1: #FF4848;
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0px 3px 10px $title;
             overflow: hidden;
-            border: 2px solid $title;
+            box-shadow: inset 0px 3px 10px $title;
+            border: 1px solid transparent;
+            transition: 0.5s all ease;
             &:hover{
                 cursor: pointer;
                 transition: 0.5s all ease;
-                box-shadow:  0px 20px 10px -10px $title;
+                border: 1px solid $title;
                 .bubble{
                
                     &:after{
@@ -265,8 +265,11 @@ $trackH1: #FF4848;
             &:after{
                 background: linear-gradient(0deg,#332530, #E903B4, #80677A 80%);
             }
+            h3{
+                margin: 0 auto;
+            }
             h2, .track-info{
-                top: 10%;
+                top: 17%;
                 position: relative;
             }
         }

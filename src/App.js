@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Header from "./components/header/header.js"
+import Header from "./components/header/header.js"
 import Player from "./components/front/player"
 // import Footer from "./components/footer/footer.js"
 import Background from './components/front/background/background.js';
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <div className="container">
         
-        {/* <Header />  */}
+        <Header /> 
         <Background />
         <Player />
 

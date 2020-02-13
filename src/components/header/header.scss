@@ -1,0 +1,11 @@
+.logo-container{
+    z-index: 2000;
+    .logo{
+        cursor: pointer;
+        z-index: 2000;
+        height: 60px;
+        margin: 0 auto;
+        padding: 1%;
+        position: fixed;
+    }
+}

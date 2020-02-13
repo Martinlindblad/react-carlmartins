@@ -1,0 +1,518 @@
+@-webkit-keyframes rotateBoxShadow {
+  0% {
+    -moz-transform: translateX(100%);
+  }
+  0% {
+    -moz-transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+@keyframes rotateBoxShadow {
+  0% {
+    -moz-transform: translateX(100%);
+  }
+  0% {
+    -moz-transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    -moz-transform: translateY(100%);
+  }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: translateY(0%);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    -moz-transform: translateY(100%);
+  }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+  100% {
+    -moz-transform: translateY(0%);
+  }
+}
+
+@-webkit-keyframes borderRotate {
+  0% {
+    border-color: transparent #FFCDF4 transparent #FFCDF4;
+  }
+  0% {
+    background-color: transparent;
+  }
+  30% {
+    border-color: #FFCDF4 transparent #FFCDF4 transparent;
+  }
+  70% {
+    border-color: transparent #FFCDF4 transparent #FFCDF4;
+  }
+  70% {
+    background-color: rgba(255, 205, 244, 0.267);
+  }
+  100% {
+    border-color: transparent #FFCDF4 transparent #FFCDF4;
+  }
+}
+
+@keyframes borderRotate {
+  0% {
+    border-color: transparent #FFCDF4 transparent #FFCDF4;
+  }
+  0% {
+    background-color: transparent;
+  }
+  30% {
+    border-color: #FFCDF4 transparent #FFCDF4 transparent;
+  }
+  70% {
+    border-color: transparent #FFCDF4 transparent #FFCDF4;
+  }
+  70% {
+    background-color: rgba(255, 205, 244, 0.267);
+  }
+  100% {
+    border-color: transparent #FFCDF4 transparent #FFCDF4;
+  }
+}
+
+@-webkit-keyframes fadeInCircle {
+  0% {
+    -webkit-transform: scale(0) translate(0px);
+            transform: scale(0) translate(0px);
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  10% {
+    -webkit-transform: scale(100) translate(10px);
+            transform: scale(100) translate(10px);
+  }
+  20% {
+    background-color: #FFCDF4;
+  }
+  30% {
+    background-color: #f57c00;
+  }
+  40% {
+    background-color: #f06292;
+  }
+  40% {
+    -webkit-transform: scale(10) translate(20px);
+            transform: scale(10) translate(20px);
+  }
+  50% {
+    background-color: #ba68c8;
+  }
+  60% {
+    background-color: #4fc3f7;
+  }
+  60% {
+    -webkit-transform: scale(20) translateY(10px) translateX(10px);
+            transform: scale(20) translateY(10px) translateX(10px);
+  }
+  60% {
+    background-color: #76ff03;
+  }
+  60% {
+    background-color: #f57c00;
+  }
+  60% {
+    background-color: #673ab7;
+  }
+  90% {
+    -webkit-transform: scale(1) translateY(50px) translateX(-10px);
+            transform: scale(1) translateY(50px) translateX(-10px);
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes fadeInCircle {
+  0% {
+    -webkit-transform: scale(0) translate(0px);
+            transform: scale(0) translate(0px);
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  10% {
+    -webkit-transform: scale(100) translate(10px);
+            transform: scale(100) translate(10px);
+  }
+  20% {
+    background-color: #FFCDF4;
+  }
+  30% {
+    background-color: #f57c00;
+  }
+  40% {
+    background-color: #f06292;
+  }
+  40% {
+    -webkit-transform: scale(10) translate(20px);
+            transform: scale(10) translate(20px);
+  }
+  50% {
+    background-color: #ba68c8;
+  }
+  60% {
+    background-color: #4fc3f7;
+  }
+  60% {
+    -webkit-transform: scale(20) translateY(10px) translateX(10px);
+            transform: scale(20) translateY(10px) translateX(10px);
+  }
+  60% {
+    background-color: #76ff03;
+  }
+  60% {
+    background-color: #f57c00;
+  }
+  60% {
+    background-color: #673ab7;
+  }
+  90% {
+    -webkit-transform: scale(1) translateY(50px) translateX(-10px);
+            transform: scale(1) translateY(50px) translateX(-10px);
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.buyTrack {
+  height: 100vh;
+  width: 100vw;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+      grid-template-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+  -ms-grid-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+      grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+  overflow: hidden;
+  position: relative;
+  -webkit-animation: fadeIn 5s ease;
+          animation: fadeIn 5s ease;
+}
+
+.buyTrack .bottom {
+  width: 100%;
+  height: 45%;
+  margin: 0 auto;
+  margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  background-color: #1B1B1B;
+}
+
+.buyTrack .bottom .buy {
+  width: 50%;
+  text-transform: capitalize;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.buyTrack .bottom .buy h4 {
+  font-size: 1.5rem;
+  margin: 0 auto;
+}
+
+.buyTrack .bottom .buy p {
+  margin: 1% auto;
+}
+
+.buyTrack .bottom .buy .button {
+  margin: 0 auto;
+  font-size: 1rem;
+  width: 80px;
+  text-align: center;
+  line-height: 1.5rem;
+  border-radius: 5px;
+  height: 30px;
+  border: 1px solid #FFCDF4;
+  -webkit-animation: borderRotate infinite linear  4s;
+          animation: borderRotate infinite linear  4s;
+  margin-top: 2%;
+}
+
+.buyTrack .bottom .buy .button:hover {
+  pointer-events: auto;
+  -webkit-box-shadow: 0px 4px 10px #FFCDF4;
+          box-shadow: 0px 4px 10px #FFCDF4;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.buyTrack .bottom .carousel-container {
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+  text-transform: capitalize;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
+.buyTrack .bottom .carousel-container .carousel {
+  height: 80%;
+}
+
+.buyTrack .bottom .carousel-container .carousel .slider {
+  height: 100%;
+  overflow: hidden;
+  width: 300px;
+}
+
+.buyTrack .bottom .carousel-container .carousel .slider .bone, .buyTrack .bottom .carousel-container .carousel .slider .btwo, .buyTrack .bottom .carousel-container .carousel .slider .bthree {
+  background-position: center;
+  background-size: cover;
+}
+
+.buyTrack .bottom .carousel-container .carousel .slider .bone::after, .buyTrack .bottom .carousel-container .carousel .slider .btwo::after, .buyTrack .bottom .carousel-container .carousel .slider .bthree::after {
+  background: linear-gradient(300deg, #332530, #E903B4, #80677A 100%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  content: "";
+  opacity: 0.5;
+}
+
+.buyTrack .bottom .button-next {
+  position: absolute;
+  background-color: transparent;
+  left: 10%;
+  top: 40%;
+  padding: 10px;
+  text-decoration: none;
+  color: #FFCDF4;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.buyTrack .bottom .button-back {
+  border: none;
+  font-size: 1.5rem;
+  color: #FFCDF4;
+  position: absolute;
+  background-color: transparent;
+  right: 10%;
+  top: 40%;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.buyTrack .one, .buyTrack .two, .buyTrack .three {
+  width: 80%;
+  height: 80%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 0px 3px 10px #FFCDF4;
+          box-shadow: 0px 3px 10px #FFCDF4;
+  overflow: hidden;
+  border: 2px solid #FFCDF4;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 7;
+  grid-column: 3 / 10;
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 7;
+  grid-row: 4/11;
+  justify-self: center;
+  -ms-flex-item-align: center;
+      align-self: center;
+  z-index: 30;
+  -webkit-animation: fadeIn 3 ease-in;
+          animation: fadeIn 3 ease-in;
+  margin: 0 auto;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+}
+
+.buyTrack .one::after, .buyTrack .two::after, .buyTrack .three::after {
+  background: linear-gradient(300deg, #332530, #E903B4, #80677A 100%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  content: "";
+  opacity: 0.5;
+}
+
+.buyTrack .one h2, .buyTrack .two h2, .buyTrack .three h2 {
+  position: relative;
+  width: 100%;
+  height: 15%;
+  font-size: 3.5rem;
+  text-align: center;
+  line-height: 200%;
+  margin: 0 auto;
+  color: #FF4848;
+}
+
+.buyTrack .one .wrapper, .buyTrack .two .wrapper, .buyTrack .three .wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+  max-height: 200px;
+}
+
+.buyTrack .one .wrapper h2, .buyTrack .two .wrapper h2, .buyTrack .three .wrapper h2 {
+  margin-left: 0;
+  margin-top: 10%;
+  line-height: 100%;
+  opacity: 0.7;
+  font-size: 1.5rem;
+  text-shadow: 1px 2px 3px black;
+  color: #FF4848;
+}
+
+.buyTrack .one .bubble, .buyTrack .two .bubble, .buyTrack .three .bubble {
+  width: 50%;
+  height: 55%;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.buyTrack .one .bubble p, .buyTrack .two .bubble p, .buyTrack .three .bubble p {
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1000;
+  display: block;
+  height: 60px;
+  width: 60px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 2px solid #FFCDF4;
+  opacity: 1;
+  line-height: 3.5rem;
+  font-weight: bold;
+  color: white;
+  -webkit-animation: borderRotate infinite linear  4s;
+          animation: borderRotate infinite linear  4s;
+}
+
+.buyTrack .one .bubble p:hover, .buyTrack .two .bubble p:hover, .buyTrack .three .bubble p:hover {
+  pointer-events: auto;
+  -webkit-box-shadow: 0px 4px 10px #FFCDF4;
+          box-shadow: 0px 4px 10px #FFCDF4;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.buyTrack .one .track-info, .buyTrack .two .track-info, .buyTrack .three .track-info {
+  width: 40%;
+  text-align: right;
+  margin: 0 auto;
+  text-align: center;
+  right: 0%;
+  padding: 10%;
+  padding-top: 0%;
+  padding-left: 0%;
+  position: relative;
+}
+
+.buyTrack .one .track-info h2, .buyTrack .two .track-info h2, .buyTrack .three .track-info h2 {
+  padding-top: 10%;
+  margin-bottom: 8%;
+  text-align: right;
+}
+
+.buyTrack .one .track-info h3, .buyTrack .two .track-info h3, .buyTrack .three .track-info h3 {
+  text-align: right;
+  position: relative;
+}
+
+.buyTrack .one .track-info h3:after, .buyTrack .two .track-info h3:after, .buyTrack .three .track-info h3:after {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  content: "";
+  background-color: white;
+  left: 0;
+  bottom: -25%;
+}
+
+.buyTrack .one .track-info:after, .buyTrack .two .track-info:after, .buyTrack .three .track-info:after {
+  background: linear-gradient(50deg, #332530, #E903B4, #80677A 60%);
+}
+/*# sourceMappingURL=buyTrack.css.map */

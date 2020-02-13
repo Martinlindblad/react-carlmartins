@@ -1,13 +1,41 @@
 import React, { Component } from 'react';
 import "./background.scss"
 
-const video = require("../../../media/city.mp4")
+
 class Background extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            playing: ["lights", "dj", "citytwo", "milky", "traffic", "sunrise", "lighthouse", "fog", "la"],
+            number: 0,
+        }
+    }
+
+    changeVideo(){   
+        let videos = this.state.number;
+        let playing = this.state.playing;
+        let video = document.querySelector("video")       
+            if(videos < playing.length - 1){
+                this.setState({
+                    number: videos + 1 
+                }) 
+                video.load()
+            }else{
+                this.setState({
+                    number: 0
+                }) 
+                video.load()
+            }
+            console.log(playing.length - 1)
+        }
     render() {
         return (
-            <video className="backgroundVideo" autoPlay="autoPlay" muted loop >
-                <source src={video} type="video/mp4" />
+            <div>
+            <div className="overlaybg"></div>
+            <video className="backgroundVideo" autoPlay="autoPlay" muted onEnded={this.changeVideo.bind(this)} >
+                <source src={require(`../../../media/${this.state.playing[this.state.number]}.mp4`)} type="video/mp4" />
             </video>
+            </div>
         )
     }
 

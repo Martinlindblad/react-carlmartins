@@ -1,0 +1,13 @@
+.logo-container {
+  z-index: 2000;
+}
+
+.logo-container .logo {
+  cursor: pointer;
+  z-index: 2000;
+  height: 60px;
+  margin: 0 auto;
+  padding: 1%;
+  position: fixed;
+}
+/*# sourceMappingURL=header.css.map */

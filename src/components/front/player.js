@@ -5,6 +5,8 @@ import "./player.scss"
 import fire from "../../fire"
 import Tracks from "./tracks/tracks"
 import BuyTrack from "./buyTrack/buyTrack"
+import Menu from "./menu/menu"
+import AllTracks from "./allTracks/allTracks"
 
 
 class Player extends Component {
@@ -93,10 +95,14 @@ class Player extends Component {
         three.style.animation = 'moveTrackThree 2s ease'
     }
 
+    changeWhichTrack(track) {
+            this.setState({ whichTrack: track })
+    }
+
     updateCurrentTrackData = (track) => {
         this.removeTrackRef()
         this.setTrackRef()
-        if (this.state.whichTrack === "all") {
+        if (this.state.whichTrack === "justhree") {
             this.gatherTracks()
         }
         setTimeout(() => {
@@ -208,7 +214,6 @@ class Player extends Component {
         });
     }
 
-
     updateTime = (time) => {
         let audio = document.getElementById('audio');
         time = audio.currentTime;
@@ -224,7 +229,6 @@ class Player extends Component {
         let timestamps = document.querySelector('.timestamps-bkg');
         timestamps.style['width'] = percent;
     }
-
 
     //TRACKS
 
@@ -249,10 +253,6 @@ class Player extends Component {
             console.log(this.snapshotToArray(snap));
         })
     }
-
-    // getTracksStorage() {
-    //     this.getArtworks();
-    // }
 
     getArtworks = () => {
         const storage = fire.storage();
@@ -295,13 +295,13 @@ class Player extends Component {
                         <Info track={this.state.track} />
                         <Time duration={Math.floor(this.state.track.duration / 60) + ':' + Math.floor(this.state.track.duration % 60 + 1)} currentTime={this.state.currentTime} />
                     </div>
-                    {this.state.renderStatus === true ? <audio id="audio"><source src={this.state.track.source} /></audio> : null}
+                    {this.state.renderStatus === true ? <audio onEnded={this.togglePlayPause} id="audio"><source src={this.state.track.source} /></audio> : null}
                     <div className="button" onClick={this.togglePlayPause}>
                         {this.state.playStatus === false ? "▶" : "⏸"}
                     </div>
                 </div>
                 {this.state.whichTrack === "all" ?
-                    <Tracks artworks={this.state.artworks} // state artwork
+                    <AllTracks buyTrack={this.state.whichTrack}
                         tracks={this.state.tracks} // state tracks
                         removeTrackRef={this.removeTrackRef} // Method to remove ref
                         playingTrack={this.state.playingTrack} // state for playing track
@@ -312,17 +312,32 @@ class Player extends Component {
                         togglePlayPause={this.togglePlayPause} // toggle playstatus button method
                         track={this.state.track} // state for Player track
                         playStatus={this.state.playStatus} // state for playstatus 
-                    />
-                    : <BuyTrack tracks={this.state.tracks} // state tracks
-                        playStatus={this.state.playStatus} // state for playstatus
-                        updateSource={this.updateSource} // update source method
-                        artworks={this.state.artworks} // state artwork
-                        updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
-                        togglePlayPause={this.togglePlayPause} // toggle playstatus button method
-                        track={this.state.track} // state for Player track
-                        buyTrack={this.state.whichTrack} // state for which track is playing
+                        artworks={this.state.artworks}
+                        playingTrack={this.state.playingTrack}
+                    /> : this.state.whichTrack === "justthree" ?
+                        <Tracks artworks={this.state.artworks} // state artwork
+                            tracks={this.state.tracks} // state tracks
+                            removeTrackRef={this.removeTrackRef} // Method to remove ref
+                            playingTrack={this.state.playingTrack} // state for playing track
+                            buyTrack={this.state.whichTrack} // state for which track is playing
+                            updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
+                            setCurrentTrackData={this.setCurrentTrackData} // set current tracks data method
+                            updateSource={this.updateSource} // update source method
+                            togglePlayPause={this.togglePlayPause} // toggle playstatus button method
+                            track={this.state.track} // state for Player track
+                            playStatus={this.state.playStatus} // state for playstatus 
+                        />
+                        : <BuyTrack tracks={this.state.tracks} // state tracks
+                            playStatus={this.state.playStatus} // state for playstatus
+                            updateSource={this.updateSource} // update source method
+                            artworks={this.state.artworks} // state artwork
+                            updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
+                            togglePlayPause={this.togglePlayPause} // toggle playstatus button method
+                            track={this.state.track} // state for Player track
+                            buyTrack={this.state.whichTrack} // state for which track is playing
                         />
                 }
+                <Menu changeWhichTrack={this.changeWhichTrack} />
             </div>
         )
     }

@@ -24,8 +24,8 @@ class BuyTrack extends Component {
     return (
       <div className="buyTrack">
         <div className={this.props.track.track} style={{ 'backgroundImage': 'url(' + this.props.track.artwork + ')' }}>
+          <div className="track-info">
           <h2>{this.props.track.title}</h2>
-            <div className="track-info">
               <h3>{this.props.track.album}</h3>
               <p>{this.props.track.description}</p>
             </div>
@@ -50,7 +50,7 @@ class BuyTrack extends Component {
                 infinite={true}
                 naturalSlideWidth={100}
                 naturalSlideHeight={125}
-                totalSlides={3}>
+                totalSlides={this.props.tracks.length}>
                 <Slider className="slider">
                   {this.props.tracks.map((track, i) => {
                     return (

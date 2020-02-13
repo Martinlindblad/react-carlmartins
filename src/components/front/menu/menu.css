@@ -1,0 +1,104 @@
+.menu {
+  position: fixed;
+  right: 0%;
+  top: 25%;
+  width: 8%;
+  margin: 0 auto;
+  z-index: 2000;
+  min-height: 50vh;
+}
+
+.menu .burger {
+  padding: 10px 0px;
+  margin: 0 auto;
+  position: relative;
+  cursor: pointer;
+}
+
+.menu .burger:hover .line {
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+  -webkit-box-shadow: 0px 3px 10px #FFCDF4;
+          box-shadow: 0px 3px 10px #FFCDF4;
+}
+
+.menu .burger.open .line:nth-child(1) {
+  opacity: 0;
+}
+
+.menu .burger.open .line:nth-child(1) {
+  opacity: 0;
+}
+
+.menu .burger.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu .burger .line {
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+  margin: 4% auto;
+  width: 40px;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #FFCDF4;
+}
+
+.menu .social-media {
+  margin: 0 auto;
+  height: 30vh;
+  position: relative;
+}
+
+.menu .social-media ul {
+  height: 100%;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.menu .social-media ul a {
+  padding: 0;
+}
+
+.menu .social-media ul a li {
+  margin: 0 auto;
+  margin-top: 40%;
+}
+
+.menu .social-media ul a li img {
+  cursor: pointer;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+  padding: 0.8vw;
+}
+
+.menu .social-media ul a li img:hover {
+  -webkit-box-shadow: inset 0px 3px 10px #FFCDF4;
+          box-shadow: inset 0px 3px 10px #FFCDF4;
+  -webkit-transition: 0.3s ease all;
+  transition: 0.3s ease all;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+/*# sourceMappingURL=menu.css.map */

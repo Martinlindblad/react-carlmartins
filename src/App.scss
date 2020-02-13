@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Boogaloo&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+
 $title: #FFCDF4;
 .App {
   text-align: center;
 }
 
-h1,h2,h3,span,p,div{
+h1,h2,span,p,h3,div{
   color: $title;
+  font-family: 'Titillium Web', sans-serif;
 }
+
 
 .App-logo {
   height: 40vmin;

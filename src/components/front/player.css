@@ -1,0 +1,283 @@
+@keyframes animateCurrentSong {
+  0% {
+    -moz-transform: translateX(100%);
+  }
+  100% {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+@-webkit-keyframes animateCurrentSong {
+  0% {
+    -webkit-transform: translateX(0 0);
+            transform: translateX(0 0);
+  }
+  100% {
+    -webkit-transform: translateX(-300px 0);
+            transform: translateX(-300px 0);
+  }
+}
+
+@-webkit-keyframes moveTrackOne {
+  0% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(70%);
+            transform: translateX(70%);
+    opacity: 0;
+  }
+}
+
+@keyframes moveTrackOne {
+  0% {
+    -webkit-transform: translateX(0px);
+            transform: translateX(0px);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(70%);
+            transform: translateX(70%);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes moveTrackTwo {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(-70%);
+            transform: translateY(-70%);
+    opacity: 0;
+  }
+}
+
+@keyframes moveTrackTwo {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(-70%);
+            transform: translateY(-70%);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes moveTrackThree {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(70%);
+            transform: translateY(70%);
+    opacity: 0;
+  }
+}
+
+@keyframes moveTrackThree {
+  0% {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(70%);
+            transform: translateY(70%);
+    opacity: 0;
+  }
+}
+
+.player {
+  position: absolute;
+  height: 40%;
+  width: 50%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 20% 20% 20% 20% 20%;
+      grid-template-columns: 20% 20% 20% 20% 20%;
+  -ms-grid-rows: 20% 20% 20% 20% 20%;
+      grid-template-rows: 20% 20% 20% 20% 20%;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.player .artwork {
+  height: 120px;
+  width: 120px;
+  background-position: center;
+  background-size: cover;
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 1;
+  grid-column: 5 / 6;
+  -ms-grid-row: 3;
+  grid-row: 3 / 3;
+  -ms-grid-column-align: start;
+      justify-self: start;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+  margin: 10px;
+  -webkit-box-shadow: inset 0px 0px 50px 1px #FFCDF4;
+          box-shadow: inset 0px 0px 50px 1px #FFCDF4;
+}
+
+.player .button {
+  width: 30px;
+  height: 15px;
+  padding: 10px;
+  font-size: 1.5rem;
+  position: relative;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 1;
+  grid-column: 4 / 5;
+  -ms-grid-row: 3;
+  grid-row: 3 /3;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  cursor: pointer;
+}
+
+.player .button:hover {
+  cursor: pointer;
+}
+
+.player h1 {
+  font-size: 4rem;
+  margin: 0;
+  padding: 0;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 3;
+  grid-column: 2 / 5;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  grid-row: 2 / 4;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+}
+
+.player .track {
+  justify-self: center;
+  -ms-flex-item-align: start;
+      align-self: start;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 3;
+  grid-column: 2 / 5;
+  -ms-grid-row: 4;
+  grid-row: 4 / 4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow: hidden;
+}
+
+.player .track .track-information {
+  position: relative;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1 / 3;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2 / 3;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+  -webkit-animation: animateCurrentSong 20s linear infinite;
+          animation: animateCurrentSong 20s linear infinite;
+}
+
+.player .track .track-information p {
+  margin: 0;
+  padding: 10px;
+  height: auto;
+}
+
+.player .track .track-information .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.player .timestamps {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-column: 1 / 5;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  grid-row: 2 / 4;
+  justify-self: start;
+  -ms-flex-item-align: end;
+      align-self: end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+  min-height: 75px;
+  max-width: 475px;
+}
+
+.player .timestamps .Time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.player .timestamps .timestamps-bkg {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 205, 244, 0)), color-stop(100%, #ffcdf4));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 205, 244, 0)), to(#ffcdf4));
+  background: linear-gradient(to bottom, rgba(255, 205, 244, 0) 0%, #ffcdf4 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4800', endColorstr='#ff4800', GradientType=0 );
+  height: 100%;
+  width: 0%;
+  -webkit-transition: width .25s ease;
+  transition: width .25s ease;
+  pointer-events: none;
+}
+/*# sourceMappingURL=player.css.map */
