@@ -10,4 +10,17 @@
   padding: 1%;
   position: fixed;
 }
+
+@media (min-width: 300px) {
+  .logo-container .logo {
+    height: 40px;
+    padding: 2%;
+  }
+}
+
+@media (min-width: 576px) {
+  .logo-container .logo {
+    padding: 1%;
+  }
+}
 /*# sourceMappingURL=header.css.map */

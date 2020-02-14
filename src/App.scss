@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Boogaloo&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
-
+@import "./components/front/player.scss";
+$black: #121212;
+$white: #FFFFFF;
+$orange: #FF4700;
+$blue: #1D2D3A;
 $title: #FFCDF4;
+$trackH1: #FF4848;
+
+
+
 .App {
   text-align: center;
 }

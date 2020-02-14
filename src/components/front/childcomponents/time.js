@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Time extends Component {
     
-    convertTime = (time) => {
+    convertTime = (time) => { 
         let minutes = Math.floor(time / 60);
         let seconds = time - (minutes * 60);
         if (seconds < 10) { seconds = '0' + seconds; }

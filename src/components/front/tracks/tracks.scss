@@ -1,57 +1,24 @@
-$title: #FFCDF4;
-$trackH1: #FF4848;
-
-@keyframes rotateBoxShadow {
-    0%   { -moz-transform: translateX(100%); }
-    0%   { -moz-transform: translateX(100%); }
-    100% { -moz-transform: translateX(-100%); }
-}
-@keyframes fadeInTrackOne {
-    0%   { transform: translateX(-150%); }
-    0%   {  opacity: 0; }
-    100%   {  opacity: 1; }
-    100%   { transform: translateX(0%); }
-}
-@keyframes fadeInTrackTwo {
-    0%   { transform: translateY(150%); }
-    0%   {  opacity: 0; }
-    100%   {  opacity: 1; }
-    100%   { transform: translateY(0%); }
-}
-@keyframes fadeInTrackThree {
-    0%   { transform: translateY(-150%); }
-    0%   {  opacity: 0; }
-    100%   {  opacity: 1; }
-    100%   { transform: translateY(0%); }
-}
-@keyframes borderRotate {
-    0%   {  border-color: transparent $title transparent $title ; }
-    0%   {  background-color: transparent; }
-    30%   {  border-color: $title transparent $title transparent  ; }
-    70%   {  border-color: transparent $title transparent $title ; }
-    70%   {  background-color: rgba(255, 205, 244, 0.267) }
-    100%   { border-color: transparent $title transparent $title ;  }
-}
-@keyframes fadeInCircle {
-    0%   { transform: scale(0) translate(0px); }
-    0%   {  opacity: 0; }
-    10%   {  opacity: 0.3; }
-    10%   { transform: scale(100) translate(10px); }
-    20% { background-color: $title;}
-    30% {   box-shadow: inset 0px 3px 10px #f57c00;}
-    40% { box-shadow: inset 0px 3px 10px #f06292;}
-    40%   { transform: scale(10) translate(20px); }
-    50% {   box-shadow: inset 0px 3px 10px #ba68c8; }
-    60% {  box-shadow: inset 0px 3px 10px #fc3f7e;}
-    60%   { transform: scale(20) translateY(10px) translateX(10px); }
-    60% {  box-shadow: inset 0px 3px 10px #76ff03;}
-    60% {  box-shadow: inset 0px 3px 10px #f57c00;}
-    60% {   box-shadow: inset 0px 3px 10px #673ab7;}
-    90%   { transform: scale(1) translateY(50px) translateX(-10px); }
-    100%   {  opacity: 0.2; }
-    
-}
-
+@mixin breakpoint($point) {
+    @if $point == big {
+      @media (min-width: 1500px) { @content ; }
+   }
+    @else if $point == desktop {
+      @media (min-width: 1200px) { @content ; }
+   }
+    @else if $point == laptop {
+      @media (min-width: 992px) { @content ; }
+   }
+     @else if $point == tablet {
+      @media (min-width: 768px) { @content ; }
+   }
+    @else if $point == phablet {
+      @media (min-width: 576px)  { @content ; }
+   }
+   @else if $point == mobileonly {
+      @media (min-width: 300px)  { @content ; }
+  
+   }
+  }
 .tracks-container{
     height: 100vh;
     width: 100vw;
@@ -76,6 +43,24 @@ $trackH1: #FF4848;
             box-shadow: inset 0px 3px 10px $title;
             border: 1px solid transparent;
             transition: 0.5s all ease;
+            @include breakpoint(mobileonly){
+                height: 40%;
+            }
+            @include breakpoint(phablet){
+                height: 60%;
+            }
+            @include breakpoint(tablet){
+                height: 50%;
+            }
+            @include breakpoint(laptop){
+                height: 50%;
+            }
+            @include breakpoint(desktop){
+                height: 70%;
+            }
+            @include breakpoint(big){
+                height: 80%;
+            }
             &:hover{
                 cursor: pointer;
                 transition: 0.5s all ease;
@@ -83,7 +68,7 @@ $trackH1: #FF4848;
                 .bubble{
                
                     &:after{
-                        animation: fadeInCircle  20s ease-out; 
+                        animation: circleAnimation 20s ease-out; 
                         animation-iteration-count: infinite;
                     }
                 }
@@ -117,6 +102,18 @@ $trackH1: #FF4848;
                 margin: 0 auto;
                 font-size: 3.1rem;
                 text-transform: capitalize;
+                @include breakpoint(mobileonly){
+                    font-size: 1rem;
+                }
+                @include breakpoint(tablet){
+                    font-size: 1.5rem;
+                }
+                @include breakpoint(laptop){
+                    font-size: 1.8rem;
+                }
+                @include breakpoint(desktop){
+                    font-size: 3.1rem;
+                }
             }
             .track-info{
                 width: 60%;
@@ -127,6 +124,18 @@ $trackH1: #FF4848;
                     color: white;
                     font-weight: bold;
                     font-size: 2rem;
+                    @include breakpoint(mobileonly){
+                        font-size: 0.6rem;
+                    }
+                    @include breakpoint(tablet){
+                        font-size: 1rem;
+                    }
+                    @include breakpoint(laptop){
+                        font-size: 1rem;
+                    }
+                    @include breakpoint(desktop){
+                        font-size: 2rem;
+                    }
                     &:after{
                         position: absolute;
                         width: 100%;
@@ -135,6 +144,22 @@ $trackH1: #FF4848;
                         background-color: white;
                         left: 0;
                         bottom: 50%;
+                        @include breakpoint(mobileonly){
+                            bottom: 60%;
+                            height: 1px;     
+                    }
+                        @include breakpoint(tablet){
+                            bottom: 50%;
+                            height: 1px;     
+                    }
+                        @include breakpoint(laptop){
+                            bottom: 50%;
+                            height: 1px;     
+                    }
+                        @include breakpoint(desktop){
+                            bottom: 50%;
+                            height: 3px;     
+                    }
                     }
                 }
                 p{
@@ -142,6 +167,26 @@ $trackH1: #FF4848;
                     color: white;
                     font-weight: bold;
                     font-size: 0.8rem;
+                    @include breakpoint(mobileonly){
+                        font-size: 0.4rem;
+                        line-height: 0.4rem;
+                        font-weight: 300;
+                    }
+                    @include breakpoint(tablet){
+                        font-size: 0.6rem;
+                        line-height: 0.7rem;
+                        font-weight: 300;
+                    }
+                    @include breakpoint(laptop){
+                        font-size: 0.7rem;
+                        line-height: 0.8rem;
+                        font-weight: 300;
+                    }
+                    @include breakpoint(desktop){
+                        font-size: 0.8rem;
+                        line-height: 0.8rem;
+                        font-weight: 300;
+                    }
                 }
                 
             }
@@ -173,6 +218,31 @@ $trackH1: #FF4848;
                 transform: translateX(-50%) translateY(-50%);
                 color: white;
                 animation: borderRotate infinite linear  4s;
+                @include breakpoint(mobileonly){
+                   height: 20px;
+                   width: 20px;
+                   line-height: 1.2rem;
+                   font-size: 0.5rem;
+                }
+                @include breakpoint(tablet){
+                   height: 30px;
+                   width: 30px;
+                   line-height: 1.8rem;
+                   font-size: 0.5rem;
+                }
+                @include breakpoint(laptop){
+                   height: 30px;
+                   width: 30px;
+                   line-height: 1.8rem;
+                   font-size: 0.5rem;
+                }
+                @include breakpoint(desktop){
+                   height: 60px;
+                   width: 60px;
+                   line-height: 3.5rem;
+                   font-size: 1.2rem;
+                   font-weight: bold;
+                }
                 &:hover{  
                     pointer-events: auto;
                     box-shadow: 0px 4px 10px $title;
@@ -183,15 +253,14 @@ $trackH1: #FF4848;
  
             &:after{
                 position: absolute;
-                left: -10px;
-                top:-10px;
-                height: 10px;
-                width: 10px;
+                left: -10%;
+                top:-10%;
+                box-shadow: inset 0px 3px 10px $title;
+                transition: 0.3s ease all;
                 border-radius: 50%;
-                background-color: $trackH1;
-                opacity: 0;
-                background:#ffff00;
-                box-shadow:0 0 50px #ffff00;
+                height: 1px;
+                 width: 1px; 
+                 padding: 0.8vw;
                 content:"";
             }
         }
@@ -202,6 +271,33 @@ $trackH1: #FF4848;
             align-self: start;
             z-index: 30;
             animation: fadeInTrackOne 0.5s linear;
+            @include breakpoint(mobileonly){
+                grid-column: 1 / 8;
+                grid-row: 6/11;
+            }
+            @include breakpoint(phablet){
+                grid-column: 2 / 7;
+                grid-row: 5/11;
+            }
+            @include breakpoint(tablet){
+                grid-column: 1/ 8;
+                grid-row: 6/11;
+            }
+            @include breakpoint(laptop){
+                grid-column: 2/ 7;
+                grid-row: 5/10;
+                align-self: center;
+            }
+            @include breakpoint(desktop){
+                grid-column: 2 / 7;
+                grid-row: 5/10;
+                align-self: start;
+            }
+            @include breakpoint(big){
+                grid-column: 2 / 7;
+                grid-row: 5/10;
+                align-self: start;
+            }
             
             &:after{
                 background: linear-gradient(300deg,#332530, #E903B4, #80677A 60%);
@@ -218,11 +314,18 @@ $trackH1: #FF4848;
                 right: 5%;
                 bottom: 20%;
                 h3{
+                  
                     &:after{
                         width: 50%;
                         bottom: 55%;
                         margin: 0 auto;
                         margin-left: 25%;
+                        @include breakpoint(mobileonly){
+                           bottom: 65%;
+                        }
+                        @include breakpoint(desktop){
+                           bottom: 55%;
+                        }
                     }
                 }
             }
@@ -234,6 +337,35 @@ $trackH1: #FF4848;
             align-self: center;
             z-index: 20;
             animation: fadeInTrackTwo 0.7s linear;
+            @include breakpoint(mobileonly){
+                grid-column: 4 / 12;
+                grid-row: 6 / 11;
+            }
+            @include breakpoint(phablet){
+                grid-column: 5 / 10;
+                grid-row: 6/11;
+            }
+            @include breakpoint(tablet){
+                grid-column: 3 / 11;
+                grid-row: 5/10;
+                align-self: end;
+                transform: translateY(10%);
+            }
+            @include breakpoint(laptop){
+                grid-column: 5 / 10;
+                grid-row: 6/11;
+                align-self: center;
+                transform: translateY(0%);
+            }
+            @include breakpoint(desktop){
+                transform: translateY(0%);
+                grid-column: 5 / 10;
+                grid-row: 6 / 11;
+                justify-self: center;
+                align-self: center;
+                z-index: 20;
+                animation: fadeInTrackTwo 0.7s linear;
+            }
             h2{
                 text-align: right;
                 position: absolute;
@@ -261,6 +393,35 @@ $trackH1: #FF4848;
             text-align: center;
             z-index: 10;
             animation: fadeInTrackThree 0.9s linear;
+            @include breakpoint(mobileonly){
+                grid-column: 4 / 11;
+                grid-row: 3 / 8;
+                align-self: center;
+            }
+            @include breakpoint(phablet){
+                grid-column: 5 / 10;
+                grid-row: 2/8;
+            }
+            @include breakpoint(tablet){
+                grid-column: 4 / 11;
+                grid-row: 3/8;
+            }
+            @include breakpoint(laptop){
+                grid-column: 5 / 10;
+                grid-row: 3/8;
+            }
+            @include breakpoint(desktop){
+                grid-column: 5 / 10;
+                grid-row: 2 / 7;
+                justify-self: end;
+                align-self: center;
+            }
+            @include breakpoint(big){
+                grid-column: 5 / 10;
+                grid-row: 2 / 7;
+                justify-self: end;
+                align-self: start;
+            }
 
             &:after{
                 background: linear-gradient(0deg,#332530, #E903B4, #80677A 80%);
@@ -271,6 +432,14 @@ $trackH1: #FF4848;
             h2, .track-info{
                 top: 17%;
                 position: relative;
+           
+                @include breakpoint(mobileonly){
+                    top: 5%;
+                }
+           
+                @include breakpoint(desktop){
+                    top: 17%;
+                }
             }
         }
         

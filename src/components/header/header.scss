@@ -1,3 +1,21 @@
+@mixin breakpoint($point) {
+    @if $point == desktop {
+      @media (max-width: 1200px) { @content ; }
+   }
+    @else if $point == laptop {
+      @media (min-width: 992px) { @content ; }
+   }
+     @else if $point == tablet {
+      @media (min-width: 768px) { @content ; }
+   }
+    @else if $point == phablet {
+      @media (min-width: 576px)  { @content ; }
+   }
+   @else if $point == mobileonly {
+      @media (min-width: 300px)  { @content ; }
+  
+   }
+  }
 .logo-container{
     z-index: 2000;
     .logo{
@@ -7,5 +25,12 @@
         margin: 0 auto;
         padding: 1%;
         position: fixed;
+        @include breakpoint(mobileonly){
+            height: 40px;
+            padding: 2%;
+        }
+        @include breakpoint(phablet){
+          padding: 1%;
+        }
     }
 }

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
+// simple component with some information 
 
 class Info extends Component {
-
+    
     render() {
         return (
             <div className="track-information">

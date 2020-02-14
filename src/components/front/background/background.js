@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import "./background.scss"
+// import "./background.scss"
 
 
 class Background extends Component {
     constructor(props){
         super(props)
         this.state = {
-            playing: ["lights", "dj", "citytwo", "milky", "traffic", "sunrise", "lighthouse", "fog", "la"],
+            playing: ["lights", "dj", "citytwo", "milky", "traffic", "sunrise", "lighthouse", "fog", "la"], // All the names for the background videos
             number: 0,
         }
     }
 
-    changeVideo(){   
+    changeVideo(){   // Will change the video state that leads to video source
         let videos = this.state.number;
         let playing = this.state.playing;
         let video = document.querySelector("video")       
@@ -26,7 +26,6 @@ class Background extends Component {
                 }) 
                 video.load()
             }
-            console.log(playing.length - 1)
         }
     render() {
         return (

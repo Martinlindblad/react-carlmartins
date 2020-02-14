@@ -1,8 +1,37 @@
-$black: #121212;
-$white: #FFFFFF;
-$orange: #FF4700;
-$blue: #1D2D3A;
-$title: #FFCDF4;
+@import "./allTracks/allTracks.scss";
+@import "./background/background.scss";
+@import "./buyTrack/buyTrack.scss";
+@import "./menu/menu.scss";
+@import "./tracks/tracks.scss";
+@mixin breakpoint($point) {
+    @if $point == big {
+      @media (min-width: 1400px) { @content ; }
+   }
+    @if $point == desktop {
+      @media (min-width: 1200px) { @content ; }
+   }
+    @else if $point == laptop {
+      @media (min-width: 992px) { @content ; }
+   }
+     @else if $point == tablet {
+      @media (min-width: 768px) { @content ; }
+   }
+    @else if $point == phablet {
+      @media (min-width: 37.5em)  { @content ; }
+   }
+   @else if $point == mobileonly {
+      @media (max-width: 37.5em)  { @content ; }
+  
+   }
+  }
+
+@mixin transition {
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation: fadeIn all 6s #{$i * 1}s ease-in;      
+      }
+    }
+}
 @mixin generate-gradient($color) {
     background: -moz-linear-gradient(top, rgba($color,0) 0%, rgba($color,1) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba($color,0)), color-stop(100%, rgba($color,1)));
@@ -16,29 +45,8 @@ $title: #FFCDF4;
     0%   { -moz-transform: translateX(100%); }
     100% { -moz-transform: translateX(-100%); }
 }
-@-moz-keyframes animateCurrentSong {
-    0%   { -moz-transform: translateX(100%); }
-    100% { -moz-transform: translateX(-100%); }
-}
-@-moz-keyframes animateCurrentSong {
-	0% { transform:translateX(0 0); }
-	100% { transform:translateX( -300px 0); }
-}
-@-webkit-keyframes animateCurrentSong {
-	0% { transform:translateX(0 0); }
-	100% { transform:translateX( -300px 0); }
-}
-@-ms-keyframes animateCurrentSong {
-    0% { transform:translateX(0 0); }
-	100% { transform:translateX( -300px 0); }
-}
-@-o-keyframes animateCurrentSong {
-	0% { transform:translateX(0 0); }
-	100% { transform:translateX( -300px 0); }
-}
 
 @keyframes moveTrackOne {
-
     0%   { transform: translateX(0px); }
     70% {opacity: 0;}
     100%    { transform: translateX(70%); opacity: 0;}
@@ -54,8 +62,60 @@ $title: #FFCDF4;
     100%   { transform: translateY(70%); opacity: 0;}
 }
 
-.player{
-    position: absolute;
+@keyframes fadeInTrackOne {
+    0%   { transform: translateX(-150%); }
+    0%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { transform: translateX(0%); }
+}
+@keyframes fadeInTrackTwo {
+    0%   { transform: translateY(150%); }
+    0%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { transform: translateY(0%); }
+}
+@keyframes fadeInTrackThree {
+    0%   { transform: translateY(-150%); }
+    0%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { transform: translateY(0%); }
+}
+
+@keyframes circleAnimation {
+    0%   { transform: scale(0) translate(0px); }
+    0%   {  opacity: 0; }
+    10%   {  opacity: 0.3; }
+    10%   { transform: scale(100) translate(10px); }
+    40%   { transform: scale(80) translate(0px); }
+    60%   { transform: scale(60) translateY(10px) translateX(10px); }
+    90%   { transform: scale(89) translateY(10px) translateX(12px); }
+    100%   {  opacity: 0.2; }
+}
+
+@keyframes rotateBoxShadow {
+    0%   { -moz-transform: translateX(100%); }
+    0%   { -moz-transform: translateX(100%); }
+    100% { -moz-transform: translateX(-100%); }
+}
+
+@keyframes fadeIn {
+    0% { -moz-transform: translateY(100%); }
+    0%   {  opacity: 0; }
+    50%   {  opacity: 0; }
+    100%   {  opacity: 1; }
+    100%   { -moz-transform: translateY(0%); }
+}
+
+@keyframes borderRotate {
+    0%   {  border-color: transparent $title transparent $title ; }
+    0%   {  background-color: transparent; }
+    30%   {  border-color: $title transparent $title transparent  ; }
+    70%   {  border-color: transparent $title transparent $title ; }
+    70%   {  background-color: rgba(255, 205, 244, 0.267) }
+    100%   { border-color: transparent $title transparent $title ;  }
+}
+
+.player{    position: absolute;
     height: 40%;
     width: 50%;
     display: grid;
@@ -63,8 +123,16 @@ $title: #FFCDF4;
     grid-template-rows: 20% 20% 20% 20% 20%; 
     overflow: hidden;
     z-index: 5;
-    
 
+    @include breakpoint(mobileonly){
+        width: 90%;
+    }
+    @include breakpoint(tablet){
+        width: 70%;
+    }
+    @include breakpoint(desktop){
+         width: 50%;
+    }
     .artwork{
         height: 120px;
         width: 120px;
@@ -76,6 +144,31 @@ $title: #FFCDF4;
         align-self: start;
         margin: 10px;
         box-shadow: inset 0px 0px 50px 1px $title;
+        @include breakpoint(mobileonly){
+            height: 60px;
+            width: 60px;
+            margin: 10px;
+        }
+        @include breakpoint(phablet){
+            grid-column: 4 / 5;
+           height: 40px;
+           width: 40px;
+            justify-self: right;
+           margin: 20px
+        }
+        @include breakpoint(tablet){
+            grid-column: 4 / 7;
+           height: 120px;
+           width: 120px;
+           margin: 10px
+        }
+        @include breakpoint(desktop){
+            grid-column: 5 / 6;
+            grid-row: 3 / 3;
+            height: 120px;
+            width: 120px;justify-self: start;
+        }
+     
     }
 
     .button{
@@ -88,6 +181,26 @@ $title: #FFCDF4;
         grid-row: 3 /3;
         justify-self: end;
         cursor: pointer;
+        @include breakpoint(mobileonly){
+            grid-column: 3 / 5;
+            font-size: 1rem;
+            grid-row: 4 /5;
+        }
+        @include breakpoint(phablet){
+            grid-column: 1 / 8;
+            grid-row: 6/11;
+        }
+        @include breakpoint(tablet){
+            grid-column: 4 / 4;
+            grid-row: 3/3;
+            justify-self: center;
+        }
+        @include breakpoint(desktop){
+            grid-column: 4 / 5;
+            grid-row: 4 ;
+            justify-self: end;
+            align-self: center;
+        }
         &:hover{
             cursor: pointer;
         }
@@ -101,15 +214,67 @@ $title: #FFCDF4;
         grid-row: 2 / 4;
         justify-self: center;
         align-self: end;
+        @include breakpoint(mobileonly){
+            font-size: 2rem;
+            align-self: center;
+            grid-column: 1 / 5;
+            grid-row: 2 / 4;
+        }
+        @include breakpoint(phablet){
+            grid-column: 1 / 5;
+            grid-row: 1/3;
+            font-size: 1.2rem;
+        }
+        @include breakpoint(tablet){
+            grid-column: 1 / 5;
+            grid-row: 1/3;
+            font-size: 3rem;
+        }
+        @include breakpoint(desktop){
+            font-size: 4rem;
+            margin:0;
+            padding: 0;
+            grid-column: 2 / 5;
+            grid-row: 2 / 4;
+            justify-self: center;
+            align-self: end;
+        }
     }
     .track{
         justify-self: center;
         align-self: start;
         grid-column: 2 / 5;
-        grid-row: 4 / 4;
+        grid-row: 3 / 4;
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        
+        @include breakpoint(mobileonly){
+            grid-column: 2 / 4;
+            grid-row: 3 / 6;
+            align-self: center;
+        }
+        @include breakpoint(phablet){
+            grid-column: 1 / 5;
+            width: 60%;
+            grid-row: 3 / 6;
+            align-self: center;
+        }
+        @include breakpoint(tablet){
+            grid-column: 1 / 4;
+            width: 100%;
+            grid-row: 3 / 4;
+            align-self: center;
+            justify-self: end;
+        }
+        @include breakpoint(desktop){
+            justify-self: center;
+            align-self: start;
+            grid-column: 2 / 5;
+            grid-row: 4 / 4;
+            display: flex;
+            flex-direction: column;
+        }
         .track-information{
             position: relative;
             grid-column: 1 / 3;
@@ -117,11 +282,34 @@ $title: #FFCDF4;
             justify-self: end;
             align-self: start;
             animation: animateCurrentSong 20s linear infinite;
-            
+            @include breakpoint(mobileonly){
+                grid-column: 1 / 3;
+                grid-row: 1 /4;
+            }
+            @include breakpoint(phablet){
+                grid-column: 1 / 2;
+                grid-row: 1 /4;  
+            }
+            @include breakpoint(tablet){
+                grid-column: 1 / 3;
+                grid-row: 2 /3;  
+            }
+            @include breakpoint(desktop){
+                grid-column: 1 / 3;
+                grid-row: 2 /3;  
+            }
             p{
                 margin: 0;
                 padding: 10px;
                 height: auto;
+                white-space: nowrap;
+                @include breakpoint(mobileonly){
+                    font-size: 0.7rem;
+                }
+                @include breakpoint(desktop){
+                    font-size: 1rem;
+                }
+          
             }
             .title{
                 display: flex;
@@ -141,6 +329,16 @@ $title: #FFCDF4;
         position: relative;
         min-height: 75px;
         max-width: 475px;
+        @include breakpoint(mobileonly){
+            width: 90%;
+        }
+        @include breakpoint(phablet){
+            width: 90%;
+        }
+        @include breakpoint(desktop){
+            width: 100%;
+        }
+
         .Time{
             display: flex;
             align-self: center;

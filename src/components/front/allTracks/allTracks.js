@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "./allTracks.scss"
+// import "./allTracks.scss"
 
 class AllTracks extends Component {
     constructor(props) {
@@ -7,9 +7,9 @@ class AllTracks extends Component {
     };
 
 
-    sendSource = (track, trackSource) => {
+    sendSource = (track, trackSource) => {  // Send all information and data from clicked track.
         let audio = document.querySelector('audio');
-        this.props.updateCurrentTrackData(track);
+        this.props.updateCurrentTrackData(track); // Will update the current track data.
         audio.load();
         this.props.updateSource(trackSource);
         this.props.togglePlayPause()

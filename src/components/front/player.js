@@ -17,7 +17,7 @@ class Player extends Component {
             renderStatus: false,
             currentTime: 0,
             playingTrack: "",
-            whichTrack: "all",
+            whichTrack: "justthree",
             track: {
                 source: "",
             },
@@ -30,6 +30,8 @@ class Player extends Component {
         this.updateSource = this.updateSource.bind(this);
         this.updateCurrentTrackData = this.updateCurrentTrackData.bind(this);
     }
+
+    // Component will set referense to db and get audio, storage, data and render when mounted
 
     componentDidMount() {
         this.setTrackRef();
@@ -45,30 +47,25 @@ class Player extends Component {
 
     }
 
-    // componentWillUnmount() {
-    //     this.removeTrackRef();
-    //     this.props.firebase.messages().off();
-    // }
-
-    renderAudio() {
+    renderAudio() {  // Called upon when rendering Audio is okay.
         setTimeout(() => {
             this.setState({ renderStatus: true })
         }, 1000);
     }
 
-    setTrackRef = () => {
+    setTrackRef = () => {  // Will attach the root of the database when called upon
         const rootRef = fire.database().ref();
     }
 
-    removeTrackRef = () => {
+    removeTrackRef = () => { // Will remove the root of the database when called upon
         const rootRef = fire.database().ref()
         rootRef.off();
     }
 
-    setCurrentTrackData = () => {
+    setCurrentTrackData = () => {  //Will set the data for current track from firebase 
         const speedRef = fire.database().ref(`tracks/trackOne`)
         speedRef.on(`value`, snap => {
-            this.setState({ track: snap.val() }, () => {
+            this.setState({ track: snap.val() }, () => { // creating a state with everything found on ref('rootname')
                 console.log(this.state.track, `set track`);
             });
         })
@@ -80,7 +77,7 @@ class Player extends Component {
         }, 1500);
     }
 
-    gatherTracks() {
+    gatherTracks() {  // Will get the three tracks on the start page and activate an animation when called upon
         let one = document.querySelector('.one')
         let two = document.querySelector('.two')
         let three = document.querySelector('.three')
@@ -95,19 +92,20 @@ class Player extends Component {
         three.style.animation = 'moveTrackThree 2s ease'
     }
 
-    changeWhichTrack(track) {
-            this.setState({ whichTrack: track })
+    changeWhichTrack = (track) => {            // Callback function from menu to change whichtrack (view) to render 
+        console.log(track)
+        this.setState({ whichTrack: track })
     }
 
-    updateCurrentTrackData = (track) => {
+    updateCurrentTrackData = (track) => {  // Will update the current track with a onClick event, recives data from clicked Track.
         this.removeTrackRef()
         this.setTrackRef()
-        if (this.state.whichTrack === "justhree") {
+        if (this.state.whichTrack === "justthree") {
             this.gatherTracks()
         }
-        setTimeout(() => {
+        setTimeout(() => {  // Set state for which track is being updated
             this.setState({ whichTrack: track })
-            const rootRef = fire.database().ref(`tracks/track${track.charAt(0).toUpperCase() + track.slice(1)}`)
+            const rootRef = fire.database().ref(`tracks/track${track.charAt(0).toUpperCase() + track.slice(1)}`) //make sure to send the right information to the database
             rootRef.on(`value`, snap => {
                 this.setState({ track: snap.val() }, () => {
                     console.log(this.state.track, `value`);
@@ -119,14 +117,14 @@ class Player extends Component {
         }, 3000);
     }
 
-    getStorage() {
+    getStorage() {  // Will call all storage files, audio/pictures.
         this.getAudio()
         this.getArtwork();
         this.getArtworks();
     }
 
-    getArtwork() {
-        const storage = fire.storage();
+    getArtwork() {  // Call on db to get artwork from storage
+        const storage = fire.storage(); 
         const storageRef = storage.refFromURL('gs://react-carlmartins.appspot.com/track')
         let trackTitle = this.state.track.title;
         trackTitle = trackTitle.toString().toLowerCase().replace(/\s/g, '');
@@ -139,8 +137,8 @@ class Player extends Component {
                 xhr.send();
                 let art = url;
                 this.setState({
-                    track: {
-                        ...this.state.track,
+                    track: { 
+                        ...this.state.track, 
                         artwork: art
                     }
                 });
@@ -150,7 +148,7 @@ class Player extends Component {
             });
     }
 
-    getAudio() {
+    getAudio() {  // Get audio from db when called upon
         const storage = fire.storage();
         const storageRef = storage.refFromURL('gs://react-carlmartins.appspot.com/track')
         let trackAudio = this.state.track.title;
@@ -175,7 +173,7 @@ class Player extends Component {
             });
     }
 
-    togglePlayPause = () => {
+    togglePlayPause = () => {  // Activated through several buttons on the page, called upon when user want to play or pause a track.
         let status = this.state.playStatus;
         let time = this.state.currentTime;
         let duration = this.state.track.duration
@@ -196,16 +194,16 @@ class Player extends Component {
             audio.pause();
         }
         this.setState({ playStatus: status });
-        const timeBomb = setInterval(() => {
+        const timeBomb = setInterval(() => {  // Update time for user to see how much of the song that's been played
             this.updateTime();
             this.updateBackground();
         }, 1000);
         setTimeout(() => {
-            clearInterval(timeBomb)
+            clearInterval(timeBomb)  // Will stop the interval from looping, causing memory leak.
         }, duration * 1000);
     }
 
-    updateSource = (trackSource) => {
+    updateSource = (trackSource) => {  // Will change state of which tracks audio is being played
         this.setState({
             track: {
                 ...this.state.track,
@@ -214,14 +212,14 @@ class Player extends Component {
         });
     }
 
-    updateTime = (time) => {
+    updateTime = (time) => {  // Update's the time played of current track
         let audio = document.getElementById('audio');
         time = audio.currentTime;
         time = Math.floor(time);
         this.setState({ currentTime: time })
     }
 
-    updateBackground = (percent) => {
+    updateBackground = (percent) => {  //This will create a animation displaying how much time been played on the track.
         let audio = document.querySelector('audio')
         let currentTime = audio.currentTime;
         let duration = this.state.track.duration;
@@ -231,8 +229,15 @@ class Player extends Component {
     }
 
     //TRACKS
-
-    snapshotToArray(snap) {
+    
+    getTracks() {
+        const rootRef = fire.database().ref()  // Will call for all tracks to db
+        const speedRef = rootRef.child(`tracks`);
+        speedRef.on('value', snap => {
+            console.log(this.snapshotToArray(snap));
+        })
+    }
+    snapshotToArray(snap) {  // Will gather all tracks piced up from db
         var tracks = [];
 
         snap.forEach(function (childSnapshot) {
@@ -246,15 +251,8 @@ class Player extends Component {
         return tracks
     };
 
-    getTracks() {
-        const rootRef = fire.database().ref()
-        const speedRef = rootRef.child(`tracks`);
-        speedRef.on('value', snap => {
-            console.log(this.snapshotToArray(snap));
-        })
-    }
 
-    getArtworks = () => {
+    getArtworks = () => {  // Will get artworks for tracks
         const storage = fire.storage();
         const storageRef = storage.ref();
         let trackTitleOne = this.state.tracks[0].title;
@@ -300,12 +298,13 @@ class Player extends Component {
                         {this.state.playStatus === false ? "▶" : "⏸"}
                     </div>
                 </div>
-                {this.state.whichTrack === "all" ?
-                    <AllTracks buyTrack={this.state.whichTrack}
+                
+                {this.state.whichTrack === "all" ?                     // Render views with all needed props
+                    <AllTracks whichTrack={this.state.whichTrack}
                         tracks={this.state.tracks} // state tracks
                         removeTrackRef={this.removeTrackRef} // Method to remove ref
                         playingTrack={this.state.playingTrack} // state for playing track
-                        buyTrack={this.state.whichTrack} // state for which track is playing
+                        whichTrack={this.state.whichTrack} // state for which track is playing
                         updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
                         setCurrentTrackData={this.setCurrentTrackData} // set current tracks data method
                         updateSource={this.updateSource} // update source method
@@ -319,7 +318,7 @@ class Player extends Component {
                             tracks={this.state.tracks} // state tracks
                             removeTrackRef={this.removeTrackRef} // Method to remove ref
                             playingTrack={this.state.playingTrack} // state for playing track
-                            buyTrack={this.state.whichTrack} // state for which track is playing
+                            whichTrack={this.state.whichTrack} // state for which track is playing
                             updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
                             setCurrentTrackData={this.setCurrentTrackData} // set current tracks data method
                             updateSource={this.updateSource} // update source method
@@ -334,10 +333,10 @@ class Player extends Component {
                             updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
                             togglePlayPause={this.togglePlayPause} // toggle playstatus button method
                             track={this.state.track} // state for Player track
-                            buyTrack={this.state.whichTrack} // state for which track is playing
+                            whichTrack={this.state.whichTrack} // state for which track is playing
                         />
                 }
-                <Menu changeWhichTrack={this.changeWhichTrack} />
+                <Menu whichTrack={this.state.whichTrack} changeWhichTrack={this.changeWhichTrack} />
             </div>
         )
     }

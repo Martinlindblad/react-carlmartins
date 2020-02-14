@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "./tracks.scss"
+// import "./tracks.scss"
 import fire from "../../../fire"
 
 class Tracks extends Component {
@@ -12,22 +12,22 @@ class Tracks extends Component {
         this.sendSource.bind()
         this.sendSource = this.sendSource.bind(this)
     }
-    sendSource = (track, trackSource) => {
+    sendSource = (track, trackSource) => {  // Will send clicked tracks data to Player component to handle
         let audio = document.querySelector('audio');
-        this.props.updateCurrentTrackData(track);
-        audio.load();
-        this.props.updateSource(trackSource);
-        this.props.togglePlayPause()
+        this.props.updateCurrentTrackData(track); // Will update all the data for this clicked track
+        audio.load(); // Reloads the audio 
+        this.props.updateSource(trackSource); // Will set new source
+        this.props.togglePlayPause() // Will toggle play the music
     }
 
     render() {
         return (
             <div className="tracks-container">
-                {this.props.tracks.map((track, i) => {
+                {this.props.tracks.map((track, i) => { // Loop out all tracks from Player state
                     return (
                         <div key={i} className={track.track} style={{ 'backgroundImage': 'url(' + this.props.artworks[i] + ')' }}>
                             <div className="bubble"><p className={"p" + track.track} onClick={() => {
-                                this.sendSource(track.track, track.source)
+                                this.sendSource(track.track, track.source) // Sending clicked track 
                             }}>
                                 {(this.props.playStatus !== false && this.props.playingTrack === track.track) ? "⏸" : "▶"}</p>
                             </div>

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import "./buyTrack.scss";
+// import "./buyTrack.scss";
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css'
+
+
+// Component using pure-react-carousel 
 
 class BuyTrack extends Component {
   constructor(props) {
@@ -9,7 +12,7 @@ class BuyTrack extends Component {
   };
 
 
-  sendSource = (track, trackSource) => {
+  sendSource = (track, trackSource) => {  // Will send source and data depending on which tracks been clicked
     let audio = document.querySelector('audio');
     if (this.props.playStatus === false) {
       this.props.updateCurrentTrackData(track);
