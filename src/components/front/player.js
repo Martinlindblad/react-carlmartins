@@ -34,7 +34,6 @@ class Player extends Component {
     // Component will set referense to db and get audio, storage, data and render when mounted
 
     componentDidMount() {
-        this.setTrackRef();
         setTimeout(() => {
             this.setCurrentTrackData()
             this.renderAudio();
@@ -53,14 +52,6 @@ class Player extends Component {
         }, 1000);
     }
 
-    setTrackRef = () => {  // Will attach the root of the database when called upon
-        const rootRef = fire.database().ref();
-    }
-
-    removeTrackRef = () => { // Will remove the root of the database when called upon
-        const rootRef = fire.database().ref()
-        rootRef.off();
-    }
 
     setCurrentTrackData = () => {  //Will set the data for current track from firebase 
         const speedRef = fire.database().ref(`tracks/trackOne`)
@@ -98,8 +89,6 @@ class Player extends Component {
     }
 
     updateCurrentTrackData = (track) => {  // Will update the current track with a onClick event, recives data from clicked Track.
-        this.removeTrackRef()
-        this.setTrackRef()
         if (this.state.whichTrack === "justthree") {
             this.gatherTracks()
         }
@@ -302,7 +291,6 @@ class Player extends Component {
                 {this.state.whichTrack === "all" ?                     // Render views with all needed props
                     <AllTracks whichTrack={this.state.whichTrack}
                         tracks={this.state.tracks} // state tracks
-                        removeTrackRef={this.removeTrackRef} // Method to remove ref
                         playingTrack={this.state.playingTrack} // state for playing track
                         whichTrack={this.state.whichTrack} // state for which track is playing
                         updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
@@ -316,7 +304,6 @@ class Player extends Component {
                     /> : this.state.whichTrack === "justthree" ?
                         <Tracks artworks={this.state.artworks} // state artwork
                             tracks={this.state.tracks} // state tracks
-                            removeTrackRef={this.removeTrackRef} // Method to remove ref
                             playingTrack={this.state.playingTrack} // state for playing track
                             whichTrack={this.state.whichTrack} // state for which track is playing
                             updateCurrentTrackData={this.updateCurrentTrackData} // update the current track method
